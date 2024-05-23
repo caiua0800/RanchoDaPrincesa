@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from "react";
+import LoginPage from './Componentes/LoginPage';
+import Navbar from './Componentes/Navbar'
+import Cadastrar from './Componentes/Cadastrar'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ModalSaveData from "./Componentes/ModalSaveData";
+
 
 function App() {
+
+
+  const [modalState, setModalState] = useState('d-none')
+  const [modalData, setModalData] = useState([])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <ModalSaveData modalData={modalData} state={modalState} setModalState={setModalState}></ModalSaveData>
+        <Routes>
+          <Route path='/cadastrar' element={<Cadastrar setModalData={setModalData} setModalState={setModalState} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
