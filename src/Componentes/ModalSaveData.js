@@ -1,19 +1,30 @@
 import './styles/ModalSaveData.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
-import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import { getFirestore, setDoc, collection, doc } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from './firebaseConfig';
 
 export default function ModalSaveData({ modalData, state, setModalState }) {
 
+    const [load, setLoad] = useState('d-none');
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
     const handleConfirmar = async () => {
 
         try {
-            await addDoc(collection(db, 'Clientes'), modalData);
+
+            setLoad('loading');
+
+            await setDoc(doc(db, 'Clientes', modalData.cpf), {
+                ...modalData
+            });
+            setLoad('d-none');
+             setTimeout(() => {
+                window.location.reload()
+            }, 500);
+
         } catch (error) {
             alert(`Erro ao dalvar cliente: ${error}`);
         }
@@ -51,6 +62,11 @@ export default function ModalSaveData({ modalData, state, setModalState }) {
                     <button className='save' onClick={handleConfirmar}>CONFIRMAR</button>
                 </div>
 
+                <div className={load}>
+
+                    <div className="c-loader"></div>
+
+                </div>
             </div>
         </div>
     )
