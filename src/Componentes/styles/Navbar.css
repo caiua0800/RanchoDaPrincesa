@@ -14,6 +14,10 @@
     transition: .3s;
 }
 
+.d-none{
+    display: none;
+}
+
 .Navbar:hover{
     background-color: white;
     transition: .3s;

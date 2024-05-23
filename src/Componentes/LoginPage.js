@@ -2,11 +2,11 @@ import React from "react";
 import './styles/LoginPage.css'
 import Login from "./Login";
 
-export default function LoginPage() {
+export default function LoginPage({ setIsLoggedIn }) {
 
     return (
         <div className="LoginPage">
-            <Login />
+            <Login setIsLoggedIn={setIsLoggedIn} />
         </div>
     )
 }

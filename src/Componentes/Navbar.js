@@ -2,9 +2,12 @@ import React from "react";
 import './styles/Navbar.css'
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ isLoggedIn }) {
+
+    const cl = isLoggedIn ? 'Navbar' : 'd-none'
+
     return (
-        <div className="Navbar">
+        <div className={cl}>
             <div className="navbar">
                 <div className="navBrand"></div>
                 <div className="nav-items">

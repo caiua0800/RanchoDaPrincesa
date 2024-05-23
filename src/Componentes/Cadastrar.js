@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './styles/Cadastrar.css'
 import Container from './Container'
+import { Navigate } from 'react-router-dom';
 
 export default function Cadastrar({ setModalState, setModalData }) {
 
