@@ -1,14 +1,26 @@
 import './styles/ModalSaveData.css';
 import React from 'react';
 import { format } from 'date-fns';
+import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import firebaseConfig from './firebaseConfig';
 
 export default function ModalSaveData({ modalData, state, setModalState }) {
 
-    const handleCloseModal = () => {
-        setModalState('d-none');
-    }
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-    const handleSaveContentModal = () => {
+    const handleConfirmar = async () => {
+
+        try {
+            await addDoc(collection(db, 'Clientes'), modalData);
+        } catch (error) {
+            alert(`Erro ao dalvar cliente: ${error}`);
+        }
+        setModalState('d-none');
+    };
+
+    const handleCloseModal = () => {
         setModalState('d-none');
     }
 
@@ -36,7 +48,7 @@ export default function ModalSaveData({ modalData, state, setModalState }) {
 
                 <div className='buttons'>
                     <button className='cancel' onClick={handleCloseModal}>CANCELAR</button>
-                    <button className='save' onClick={handleSaveContentModal}>CONFIRMAR</button>
+                    <button className='save' onClick={handleConfirmar}>CONFIRMAR</button>
                 </div>
 
             </div>
