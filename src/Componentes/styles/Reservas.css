@@ -1,0 +1,7 @@
+.Reservas {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 100px;
+    background-color: rgba(0, 255, 255, 0.671);
+}

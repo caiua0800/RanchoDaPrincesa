@@ -1,0 +1,103 @@
+.Reservar {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 100px;
+    background-color: rgba(0, 255, 255, 0.671);
+}
+
+.reserva-form {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    height: 450px;
+    background-color: aliceblue;
+    padding: 30px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.flex-inputs {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.flex-inputs div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.flex-inputs div p {
+    margin: 0;
+    font-weight: 600;
+}
+
+.flex-inputs div input {
+    width: 250px;
+    height: 35px;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.685);
+    text-align: center;
+}
+
+.flex-inputs div select {
+    width: 100%;
+    height: 40px;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.685);
+    text-align: center;
+}
+
+.search-responsavel {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.search-responsavel div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.search-responsavel div p {
+    font-weight: 600;
+    margin: 0;
+}
+
+.search-responsavel div input {
+    height: 30px;
+    font-size: 24px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.699);
+}
+
+.search-responsavel div select {
+    margin-top: 10px;
+    height: 40px;
+    font-size: 22px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.699);
+}
+
+.search-responsavel div select option {
+    text-align: center;
+}
+
+.reservar {
+    height: 40px;
+    background-color: rgb(15, 202, 46);
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.reservar:hover {
+    background-color: rgb(1, 255, 43);
+    transition: .3s;
+}

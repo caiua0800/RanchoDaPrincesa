@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Container from './Container';
 import Cad from './Cad';
 import firebaseConfig from './firebaseConfig';
-import { getFirestore, collection, getDocs, deleteDoc, doc as firestoreDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, deleteDoc, doc as firestoreDoc, setDoc } from 'firebase/firestore'; // Importação principal
+import { query, where } from 'firebase/firestore'; // Importação adicional necessária
 import { initializeApp } from 'firebase/app';
 import { Link } from 'react-router-dom';
 import ModalClient from './ModalClient';
@@ -35,6 +36,38 @@ export default function Cadastros() {
         }
     };
 
+    const fetchReservasAnteriores = async (cpf) => {
+        try {
+            const reservasCollection = collection(db, 'Reservas');
+            const q = query(reservasCollection, where('responsavel', '==', cpf));
+            const snapshot = await getDocs(q);
+            const reservasAnteriores = snapshot.docs.map(doc => doc.data());
+            return reservasAnteriores; // Retornar os dados das reservas anteriores
+        } catch (error) {
+            console.error("Erro ao buscar reservas anteriores: ", error);
+            return []; // Retorna um array vazio em caso de erro
+        }
+    };
+
+    const handleReservasAnterioresClick = async () => {
+        try {
+            if (!clickedClient || !clickedClient.cpf) {
+                throw new Error('Cliente não selecionado ou CPF inválido.');
+            }
+            // Chame a função fetchReservasAnteriores com o CPF do cliente clicado
+            const reservas = await fetchReservasAnteriores(clickedClient.cpf);
+            
+            // Abra uma nova janela com os dados JSON formatados
+            const formattedJson = JSON.stringify(reservas, null, 2); // Indentação de 2 espaços
+            const newWindow = window.open();
+            newWindow.document.write(`<pre>${formattedJson}</pre>`);
+        } catch (error) {
+            console.error('Erro ao buscar reservas anteriores: ', error);
+        }
+    };
+    
+    
+
     useEffect(() => {
         fetchClientes();
     }, []);
@@ -42,7 +75,6 @@ export default function Cadastros() {
     const handleClientClick = (cliente) => {
         setClickedClient(cliente);
         setShowModal(true);
-        // Setar os valores editados para os valores do cliente clicado
         setEditedNome(cliente.nome);
         setEditedSobrenome(cliente.sobrenome);
         setEditedCPF(cliente.cpf);
@@ -164,7 +196,7 @@ export default function Cadastros() {
                                     onChange={(e) => setEditedCEP(e.target.value)} 
                                 />
                             </div>
-                            <button className={!inputState ? 'd-none' : 'reserve'}  doc={clickedClient.cpf}>RESERVAR</button>
+                            <button onClick={handleReservasAnterioresClick} id='reservas-ant'>RESERVAS ANTERIORES</button>
                         </div>
                     )}
                     <div className='client-buttons'>

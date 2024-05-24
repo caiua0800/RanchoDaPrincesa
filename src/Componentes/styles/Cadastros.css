@@ -56,6 +56,10 @@
     height: 30px;
 }
 
+#reservas-ant{
+    cursor: pointer;
+}
+
 .client-buttons {
     display: flex;
     justify-content: space-around;
