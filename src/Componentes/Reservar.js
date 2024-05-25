@@ -116,7 +116,7 @@ export default function Reservar() {
                             <div>
                                 <p>Responsável</p>
                                 <input className='setWidthAll' type='text' placeholder='Nome ou CPF' value={searchInput} onChange={handleInputChange} />
-                                <select onChange={(e) => setSelectedResponsible(e.target.value)}>
+                                <select className='setWidthAll' onChange={(e) => setSelectedResponsible(e.target.value)}>
                                     <option value='null'>Selecione</option>
                                     {searchResults
                                         .filter(result => 
