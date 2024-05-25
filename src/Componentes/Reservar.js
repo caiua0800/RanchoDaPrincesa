@@ -80,21 +80,21 @@ export default function Reservar() {
                         <div className='flex-inputs checks'>
                             <div>
                                 <p>Check-in</p>
-                                <input type='date' value={checkin} onChange={(e) => setCheckin(e.target.value)} />
+                                <input className='setWidthAll' type='date' value={checkin} onChange={(e) => setCheckin(e.target.value)} />
                             </div>
                             <div>
                                 <p>Check-out</p>
-                                <input type='date' value={checkout} onChange={(e) => setCheckout(e.target.value)} />
+                                <input className='setWidthAll' type='date' value={checkout} onChange={(e) => setCheckout(e.target.value)} />
                             </div>
                             <div>
                                 <p>Qtde/Pessoas</p>
-                                <input type='number' value={qtdePessoas} onChange={(e) => setQtdePessoas(e.target.value)} />
+                                <input className='setWidthAll' type='number' value={qtdePessoas} onChange={(e) => setQtdePessoas(e.target.value)} />
                             </div>
                         </div>
                         <div className='flex-inputs'>
                             <div>
                                 <p>Chalés</p>
-                                <select id='chales' value={chales} onChange={(e) => setChales(e.target.value)}>
+                                <select className='setWidthAll' id='chales' value={chales} onChange={(e) => setChales(e.target.value)}>
                                     <option value='null'>Selecione</option>
                                     <option value='caiua'>Caiuã</option>
                                     <option value='master'>Master</option>
@@ -105,17 +105,17 @@ export default function Reservar() {
                             </div>
                             <div>
                                 <p>TOTAL R$</p>
-                                <input placeholder='valor total' value={total} onChange={(e) => setTotal(e.target.value)}/>
+                                <input className='setWidthAll' placeholder='valor total' value={total} onChange={(e) => setTotal(e.target.value)}/>
                             </div>
                             <div>
                                 <p>JÁ PAGO R$</p>
-                                <input placeholder='valor já pago' value={jaPago} onChange={(e) => setJaPago(e.target.value)}/>
+                                <input className='setWidthAll' placeholder='valor já pago' value={jaPago} onChange={(e) => setJaPago(e.target.value)}/>
                             </div>
                         </div>
                         <div className='search-responsavel'>
                             <div>
                                 <p>Responsável</p>
-                                <input type='text' placeholder='Nome ou CPF' value={searchInput} onChange={handleInputChange} />
+                                <input className='setWidthAll' type='text' placeholder='Nome ou CPF' value={searchInput} onChange={handleInputChange} />
                                 <select onChange={(e) => setSelectedResponsible(e.target.value)}>
                                     <option value='null'>Selecione</option>
                                     {searchResults

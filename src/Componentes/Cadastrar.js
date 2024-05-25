@@ -50,7 +50,7 @@ export default function Cadastrar({ setModalState, setModalData }) {
                     </div>
                     <div className="client-input-box">
                         <label htmlFor="birth">Data de Nascimento</label>
-                        <input type="date" id="birth" name="birth" value={values.birth} onChange={handleChange} />
+                        <input className="data-de-nascimento" type="date" id="birth" name="birth" value={values.birth} onChange={handleChange} />
                     </div>
                     <div className="client-input-box">
                         <label htmlFor="adress">Endereço</label>

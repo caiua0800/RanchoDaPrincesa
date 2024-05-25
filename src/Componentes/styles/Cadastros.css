@@ -122,13 +122,14 @@
 
 @media (max-width: 750px){
     .Cadastros {
-        height: 100%;
+        height: 100vh;
+        overflow: hidden;
     }
     
     .all-cadastros {
         width: 90%;
         height: 400px;
-        background-color: rgba(255, 255, 255, 0);
+        background-color: rgba(7, 24, 255, 0.26);
         gap: 10px;
     }
     
