@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { getFirestore, setDoc, collection, doc } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from './firebaseConfig';
+import Loading from './Loading';
 
 export default function ModalSaveData({ modalData, state, setModalState }) {
 
@@ -61,12 +62,7 @@ export default function ModalSaveData({ modalData, state, setModalState }) {
                     <button className='cancel' onClick={handleCloseModal}>CANCELAR</button>
                     <button className='save' onClick={handleConfirmar}>CONFIRMAR</button>
                 </div>
-
-                <div className={load}>
-
-                    <div className="c-loader"></div>
-
-                </div>
+                <Loading load={load} />
             </div>
         </div>
     )

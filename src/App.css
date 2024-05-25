@@ -3,3 +3,11 @@
   height: 100vh;
 }
 
+@media (max-width: 750px){
+  .App {
+    text-align: center;
+    min-height: max-content;
+  }
+  
+}
+

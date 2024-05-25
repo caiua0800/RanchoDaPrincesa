@@ -57,3 +57,47 @@
 .nav-link:hover{
     color: rgb(7, 122, 122) !important;
 }
+
+.icons{
+    display: none;
+}
+
+.sem-icons{
+    display: block;
+}
+
+@media (max-width: 750px) {
+    .Navbar{
+        height: 80px;
+        padding: 10px 10px;
+        transition: .3s;
+    }
+
+    .nav-items{
+        display: flex;
+        width: 80%;
+        gap: 20px;
+    }
+
+    .nav-item{
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: end;
+        padding: 0px;
+        width: max-content;
+    }
+
+    .sem-icons{
+        display: none;
+    }
+
+    .icons{
+        display: block;
+    }
+
+    .icons img{
+        width: 50px;
+    }
+    
+}

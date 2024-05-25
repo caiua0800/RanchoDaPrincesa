@@ -62,3 +62,44 @@
     text-align: center;
     color: rgba(0, 0, 0, 0.781);
 }
+
+@media (max-width: 800px) {
+
+    .Cadastrar {
+        padding-top: 100px;
+        height: 100%;
+    }
+
+    .formulario {
+        border-radius: 8px;
+        gap: 10px;
+        width: 100%;
+        padding: 40px 10px;
+    }
+
+    .formulario button {
+        width: 80%;
+        border-radius: 8px;
+    }
+
+    .client-input-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .client-input-box label {
+        font-size: 1.3em;
+    }
+
+    .client-input-box input {
+        width: 80%;
+        box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.534);
+        font-size: 28px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.781);
+    }
+}

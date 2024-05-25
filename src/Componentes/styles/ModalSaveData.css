@@ -97,3 +97,9 @@
       transform: rotate(1turn);
     }
 }
+
+@media (max-width:750px){
+    .ModalSaveData{
+        height: 120vh;
+    }
+}

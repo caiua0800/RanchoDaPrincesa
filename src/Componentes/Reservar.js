@@ -77,7 +77,7 @@ export default function Reservar() {
             <Container>
                 <div className='reserva-form'>
                     <div className='just-for-separation'>
-                        <div className='flex-inputs'>
+                        <div className='flex-inputs checks'>
                             <div>
                                 <p>Check-in</p>
                                 <input type='date' value={checkin} onChange={(e) => setCheckin(e.target.value)} />
