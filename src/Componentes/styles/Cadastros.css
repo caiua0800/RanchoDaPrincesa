@@ -45,6 +45,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    width: 100%;
 }
 
 .client-details div p {
@@ -52,6 +53,7 @@
 }
 
 .client-details div input {
+    width: 100%;
     text-align: center;
     height: 30px;
 }

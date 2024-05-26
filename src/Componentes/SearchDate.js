@@ -3,7 +3,7 @@ import './styles/SearchDate.css';
 import firebaseConfig from './firebaseConfig';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
-import procurarDisponibilidade from '../dataAlgorithm';
+import { procurarDisponibilidade } from '../dataAlgorithm';
 import Container from "./Container";
 import { Link } from "react-router-dom";
 

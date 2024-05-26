@@ -35,8 +35,10 @@ export default function Reservas() {
 
     const formatDate = (dateString) => {
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-BR', options);
+        // Cria uma data sem ajuste de fuso horário
+        const [year, month, day] = dateString.split('-');
+        const localDate = new Date(year, month - 1, day); // `month - 1` porque os meses em JavaScript começam em 0
+        return localDate.toLocaleDateString('pt-BR', options);
     };
 
     const handleMonthChange = (e) => {
