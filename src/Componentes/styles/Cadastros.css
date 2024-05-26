@@ -9,7 +9,7 @@
 .all-cadastros {
     width: 100%;
     height: 600px;
-    background-color: rgba(255, 255, 255, 0.849);
+    background-color: rgba(255, 255, 255, 0.418);
     border-radius: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -120,6 +120,32 @@
     transition: .3s;
 }
 
+.search-client{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 5px;
+}
+
+.search-client input{
+    width: 80%;
+    height: 30px;
+    border-radius: 20px;
+    border: 0;
+    box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.432);
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.search-client button{
+    width: 80%;
+    height: 30px;
+    cursor: pointer;
+}
+
 @media (max-width: 750px){
     .Cadastros {
         height: 100vh;
@@ -129,7 +155,7 @@
     .all-cadastros {
         width: 90%;
         height: 400px;
-        background-color: rgba(7, 24, 255, 0.26);
+        background-color: rgba(255, 255, 255, 0.418);
         gap: 10px;
     }
     

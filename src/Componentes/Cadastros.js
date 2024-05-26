@@ -14,9 +14,11 @@ export default function Cadastros() {
     const [showModal, setShowModal] = useState(false);
     const [clickedClient, setClickedClient] = useState(null);
     const [inputState, setInputState] = useState(true);
+    const [searchValue, setSearchValue] = useState('');
 
     const [editedNome, setEditedNome] = useState('');
     const [editedSobrenome, setEditedSobrenome] = useState('');
+    const [editedContato, setEditedContato] = useState('');
     const [editedCPF, setEditedCPF] = useState('');
     const [editedEndereco, setEditedEndereco] = useState('');
     const [editedBairro, setEditedBairro] = useState('');
@@ -30,11 +32,26 @@ export default function Cadastros() {
             const clientesCollection = collection(db, 'Clientes');
             const snapshot = await getDocs(clientesCollection);
             const clientesList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setClientes(clientesList);
+
+            // Filtro para exibir todos os clientes ou aqueles que correspondem ao valor de pesquisa
+            const filteredClientes = clientesList.filter(cliente =>
+                cliente.nome.toLowerCase().includes(searchValue.toLowerCase()) ||
+                cliente.cpf.includes(searchValue)
+            );
+
+            setClientes(filteredClientes);
         } catch (error) {
             console.error("Erro ao buscar clientes: ", error);
         }
     };
+
+    useEffect(() => {
+        fetchClientes();
+    }, []);
+
+    useEffect(() => {
+        fetchClientes();
+    }, [searchValue]);
 
     const fetchReservasAnteriores = async (cpf) => {
         try {
@@ -66,16 +83,11 @@ export default function Cadastros() {
         }
     };
     
-    
-
-    useEffect(() => {
-        fetchClientes();
-    }, []);
-
     const handleClientClick = (cliente) => {
         setClickedClient(cliente);
         setShowModal(true);
         setEditedNome(cliente.nome);
+        setEditedContato(cliente.contato);
         setEditedSobrenome(cliente.sobrenome);
         setEditedCPF(cliente.cpf);
         setEditedEndereco(cliente.adress);
@@ -97,7 +109,6 @@ export default function Cadastros() {
                 throw new Error('Cliente não selecionado ou CPF inválido.');
             }
             
-            // Obtém a referência do documento no Firestore usando o CPF do cliente
             const clienteRef = firestoreDoc(db, 'Clientes', clickedClient.cpf);
             await deleteDoc(clienteRef); // Usando deleteDoc() para excluir o documento
             await fetchClientes();
@@ -108,9 +119,6 @@ export default function Cadastros() {
     }
     
     
-    
-
-
     const handleSaveClick = async () => {
         setInputState(true);
     
@@ -121,6 +129,7 @@ export default function Cadastros() {
                 nome: editedNome,
                 sobrenome: editedSobrenome,
                 cpf: editedCPF,
+                contato: editedContato,
                 adress: editedEndereco,
                 bairro: editedBairro,
                 cep: editedCEP
@@ -173,6 +182,14 @@ export default function Cadastros() {
                                 />
                             </div>
                             <div>
+                                <p>Contato</p>
+                                <input 
+                                    disabled={inputState} 
+                                    value={editedContato} 
+                                    onChange={(e) => setEditedContato(e.target.value)} 
+                                />
+                            </div>
+                            <div>
                                 <p>Endereço</p>
                                 <input 
                                     disabled={inputState} 
@@ -180,6 +197,7 @@ export default function Cadastros() {
                                     onChange={(e) => setEditedEndereco(e.target.value)} 
                                 />
                             </div>
+
                             <div>
                                 <p>Bairro</p>
                                 <input 
@@ -207,12 +225,20 @@ export default function Cadastros() {
                 </ModalClient>
             )}
             <Container>
+                <div className='search-client'>
+                <input
+                        placeholder='NOME OU CPF'
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                    />
+                </div>
                 <div className='all-cadastros'>
                     {clientes.map(cliente => (
                         <Cad
                             key={cliente.id}
                             nome={cliente.nome}
                             sobrenome={cliente.sobrenome}
+                            contato={cliente.contato}
                             cpf={cliente.cpf}
                             adress={cliente.address}
                             bairro={cliente.bairro}

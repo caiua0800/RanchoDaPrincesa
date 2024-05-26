@@ -8,6 +8,7 @@ import ModalSaveData from "./Componentes/ModalSaveData";
 import Cadastros from './Componentes/Cadastros';
 import Reservar from './Componentes/Reservar';
 import Reservas from './Componentes/Reservas';
+import SearchDate from './Componentes/SearchDate';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -48,6 +49,7 @@ function App() {
               <Route path="/cadastros" element={<Cadastros isLoggedIn={isLoggedIn} />} />
               <Route path="/reservar" element={<Reservar isLoggedIn={isLoggedIn} />} />
               <Route path="/reservas" element={<Reservas isLoggedIn={isLoggedIn} />} />
+              <Route path="/dates" element={<SearchDate isLoggedIn={isLoggedIn} />} />
               <Route path="*" element={<Navigate to="/cadastros" />} /> 
             </>
           )}

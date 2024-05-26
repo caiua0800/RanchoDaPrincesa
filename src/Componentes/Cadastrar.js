@@ -13,7 +13,8 @@ export default function Cadastrar({ setModalState, setModalData }) {
         birth: '',
         adress: '',
         bairro: '',
-        cep: ''
+        cep: '',
+        contato: ''
     });
 
     const handleChange = (event) => {
@@ -51,6 +52,10 @@ export default function Cadastrar({ setModalState, setModalData }) {
                     <div className="client-input-box">
                         <label htmlFor="birth">Data de Nascimento</label>
                         <input className="data-de-nascimento" type="date" id="birth" name="birth" value={values.birth} onChange={handleChange} />
+                    </div>
+                    <div className="client-input-box">
+                        <label htmlFor="contato">Contato</label>
+                        <input type="text" id="birth" name="contato" value={values.contato} onChange={handleChange} />
                     </div>
                     <div className="client-input-box">
                         <label htmlFor="adress">Endereço</label>

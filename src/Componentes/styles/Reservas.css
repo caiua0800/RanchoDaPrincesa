@@ -5,3 +5,48 @@
     padding-top: 100px;
     background-color: rgba(0, 255, 255, 0.671);
 }
+
+#mes{
+    width: 90%;
+    height: 30px;
+    text-align: center;
+    background-color: rgb(1, 5, 5);
+    font-weight: 600;
+    color: white;
+}
+
+#mes option{
+    text-align: center;
+}
+
+#reservas{
+    width: 90%;
+    height: 450px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    /* border: 2px solid black; */
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.089);
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.664);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reserva{
+    background-color: rgb(8, 218, 255);
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.61);
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reserva h4{
+    margin: 0%;
+}
