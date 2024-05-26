@@ -120,11 +120,11 @@ export default function Reservar() {
                                         setChales(newChales);
                                     }}>
                                         <option value='null'>Selecione</option>
-                                        <option value='caiua'>Caiuã</option>
-                                        <option value='master'>Master</option>
-                                        <option value='mayra'>Mayra</option>
-                                        <option value='nathalia'>Nathalia</option>
-                                        <option value='trancoso'>Trancoso</option>
+                                        <option value='Caiuã'>Caiuã</option>
+                                        <option value='Master'>Master</option>
+                                        <option value='Mayra'>Mayra</option>
+                                        <option value='Nathalia'>Nathalia</option>
+                                        <option value='Trancoso'>Trancoso</option>
                                     </select>
                                 </div>
                             ))}

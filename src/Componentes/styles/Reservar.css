@@ -1,6 +1,7 @@
 .Reservar {
     width: 100%;
-    height: max-content;
+    min-height: 100vh;
+    max-height: max-content;
     box-sizing: border-box;
     padding-top: 100px;
     background-color: rgba(0, 255, 255, 0.671);
