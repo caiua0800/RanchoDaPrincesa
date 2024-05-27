@@ -9,7 +9,7 @@ import { initializeApp } from 'firebase/app';
 import { Link } from 'react-router-dom';
 import ModalClient from './ModalClient';
 
-export default function Cadastros() {
+export default function Cadastros({setClientReserves}) {
     const [clientes, setClientes] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [clickedClient, setClickedClient] = useState(null);
@@ -93,6 +93,7 @@ export default function Cadastros() {
         setEditedEndereco(cliente.adress);
         setEditedBairro(cliente.bairro);
         setEditedCEP(cliente.cep);
+        setClientReserves(cliente.cpf);
     };
 
     const handleEditClick = () => {
@@ -214,7 +215,10 @@ export default function Cadastros() {
                                     onChange={(e) => setEditedCEP(e.target.value)} 
                                 />
                             </div>
-                            <button onClick={handleReservasAnterioresClick} id='reservas-ant'>RESERVAS ANTERIORES</button>
+                            <Link to='/reservascliente'>
+                                <button>RESERVAS ANTERIORES</button>
+                            </Link>
+                            
                         </div>
                     )}
                     <div className='client-buttons'>

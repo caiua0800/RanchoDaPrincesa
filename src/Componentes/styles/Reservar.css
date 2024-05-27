@@ -145,6 +145,19 @@
     height: 40px;
 }
 
+.div-chale{
+    display: flex;
+    flex-direction: row !important;
+    justify-content: end;
+    align-items: end !important;
+    width: 100%;
+    gap: 20px;
+}
+
+.remove{
+    background-color: red;
+}
+
 @media (max-width: 750px){
 
     .reserva-form {

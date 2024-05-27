@@ -9,11 +9,14 @@ import Cadastros from './Componentes/Cadastros';
 import Reservar from './Componentes/Reservar';
 import Reservas from './Componentes/Reservas';
 import SearchDate from './Componentes/SearchDate';
+import ReservasCliente from './Componentes/ReservasCliente';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [modalState, setModalState] = useState('d-none');
   const [modalData, setModalData] = useState([]);
+
+  const [clientReserves, setClientReserves] = useState('')
 
   useEffect(() => {
     // Verificar o armazenamento local ao carregar a página
@@ -46,10 +49,11 @@ function App() {
           ) : (
             <>
               <Route path="/cadastrar" element={<Cadastrar isLoggedIn={isLoggedIn} setModalData={setModalData} setModalState={setModalState} />} />
-              <Route path="/cadastros" element={<Cadastros isLoggedIn={isLoggedIn} />} />
+              <Route path="/cadastros" element={<Cadastros setClientReserves={setClientReserves} isLoggedIn={isLoggedIn} />} />
               <Route path="/reservar" element={<Reservar isLoggedIn={isLoggedIn} />} />
               <Route path="/reservas" element={<Reservas isLoggedIn={isLoggedIn} />} />
               <Route path="/dates" element={<SearchDate isLoggedIn={isLoggedIn} />} />
+              <Route path="/reservascliente" element={<ReservasCliente clientReserves={clientReserves} isLoggedIn={isLoggedIn} />} />
               <Route path="*" element={<Navigate to="/cadastros" />} /> 
             </>
           )}

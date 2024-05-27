@@ -1,7 +1,7 @@
 const chales = [
     'Mayra',
     'Caiuã',
-    'Nathalia',
+    'Luana',
     'Trancoso',
     'Master'
 ];

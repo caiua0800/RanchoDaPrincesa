@@ -5,6 +5,7 @@ import firebaseConfig from './firebaseConfig';
 import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { Link } from 'react-router-dom';
+import { verificarDisponibilidade } from '../dataAlgorithm';
 
 export default function Reservar() {
     const [searchInput, setSearchInput] = useState('');
@@ -15,7 +16,7 @@ export default function Reservar() {
     const [checkin, setCheckin] = useState('');
     const [checkout, setCheckout] = useState('');
     const [qtdePessoas, setQtdePessoas] = useState('');
-    const [chales, setChales] = useState(['']); // Alterado para array
+    const [chales, setChales] = useState(['']);
     const [total, setTotal] = useState('');
     const [jaPago, setJaPago] = useState('');
 
@@ -53,7 +54,7 @@ export default function Reservar() {
                 checkIn: checkin,
                 checkOut: checkout,
                 qtdePessoas: qtdePessoas,
-                chale: chales.join(', '), // Alterado para unir os chalés em uma string
+                chale: chales.join(', '),
                 responsavel: selectedResponsible,
                 responsavelNome: selectedResponsibleNome,
                 total: total,
@@ -73,7 +74,7 @@ export default function Reservar() {
         setCheckin('');
         setCheckout('');
         setQtdePessoas('');
-        setChales(['']); // Alterado para array com um elemento vazio
+        setChales(['']);
         setTotal('');
         setJaPago('');
         setSelectedResponsible('');
@@ -81,12 +82,47 @@ export default function Reservar() {
     };
 
     const handleAddChaleInput = () => {
-        setChales(prevChales => [...prevChales, '']); // Adiciona um novo input vazio
+        setChales(prevChales => [...prevChales, '']);
     };
 
     useEffect(() => {
         searchFirestore();
     }, []);
+
+    const formatDate = (dateString) => {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        // Cria uma data sem ajuste de fuso horário
+        const [year, month, day] = dateString.split('-');
+        const localDate = new Date(year, month - 1, day); // `month - 1` porque os meses em JavaScript começam em 0
+        return localDate.toLocaleDateString('pt-BR', options);
+    };
+
+    useEffect(() => {
+        const verificarChales = async () => {
+            if (checkin && checkout && chales.length > 0 && chales[0] !== '') {
+                const reservasSnapshot = await getDocs(collection(db, 'Reservas'));
+                const reservas = reservasSnapshot.docs.map(doc => doc.data());
+
+                const result = verificarDisponibilidade(checkin, checkout, chales, reservas);
+
+                if (result.indisponiveis.length > 0) {
+                    const messages = result.indisponiveis.map((chale, index) => {
+                        const hospede = result.hospedesEncontrados[index];
+                        return `${result.hospedesEncontrados[index].responsavel}, está usando o chalé ${chale} na data ${formatDate(hospede.checkin)} - ${formatDate(hospede.checkout)}`;
+                    });
+                    alert(messages.join('\n'));
+                } else {
+                    alert('Todos os chalés selecionados estão disponíveis.');
+                }
+            }
+        };
+
+        verificarChales();
+    }, [checkin, checkout, chales]);
+
+    const handleRemoveChale = (key) => {
+        setChales(prevChales => prevChales.filter((_, index) => index !== key));
+    }
 
     return (
         <div className='Reservar'>
@@ -112,20 +148,23 @@ export default function Reservar() {
                         </div>
                         <div className='flex-inputs chales'>
                             {chales.map((chale, index) => (
-                                <div key={index}>
-                                    <p>Chalé {index + 1}</p>
-                                    <select className='setWidthAll' value={chale} onChange={(e) => {
-                                        const newChales = [...chales];
-                                        newChales[index] = e.target.value;
-                                        setChales(newChales);
-                                    }}>
-                                        <option value='null'>Selecione</option>
-                                        <option value='Caiuã'>Caiuã</option>
-                                        <option value='Master'>Master</option>
-                                        <option value='Mayra'>Mayra</option>
-                                        <option value='Nathalia'>Nathalia</option>
-                                        <option value='Trancoso'>Trancoso</option>
-                                    </select>
+                                <div className='div-chale' key={index}>
+                                    <div>
+                                        <p>Chalé {index + 1}</p>
+                                        <select className='setWidthAll' value={chale} onChange={(e) => {
+                                            const newChales = [...chales];
+                                            newChales[index] = e.target.value;
+                                            setChales(newChales);
+                                        }}>
+                                            <option value=''>Selecione</option>
+                                            <option value='Caiuã'>Caiuã</option>
+                                            <option value='Master'>Master</option>
+                                            <option value='Mayra'>Mayra</option>
+                                            <option value='Luana'>Luana</option>
+                                            <option value='Trancoso'>Trancoso</option>
+                                        </select>
+                                    </div>
+                                    <button onClick={() => handleRemoveChale(index)} className='remove'>-</button>
                                 </div>
                             ))}
                             <div>

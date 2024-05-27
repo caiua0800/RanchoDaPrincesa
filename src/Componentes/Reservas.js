@@ -87,7 +87,7 @@ export default function Reservas() {
 
                 <div id='reservas'>
                     {filterReservasByMonth().map((reserva, key) => (
-                        <div className='reserva' key={key} onClick={() => modalState(reserva)}>
+                        <div className={`reserva ${parseFloat(reserva.jaPago) > 0 ? 'pago' : ''}`} key={key} onClick={() => modalState(reserva)}>
                             <div>
                                 <h4>CHECKIN - CHECKOUT</h4>
                                 <h4>{formatDate(reserva.checkIn)} - {formatDate(reserva.checkOut)}</h4>
